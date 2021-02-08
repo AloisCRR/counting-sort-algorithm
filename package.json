@@ -1,5 +1,5 @@
 {
-  "name": "reusable-sorting-algorithm",
+  "name": "typescript-reusable-counting-sort",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "Alois Carrera",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^14.14.25",
     "tsc-watch": "^4.2.9",
