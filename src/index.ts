@@ -1,47 +1,14 @@
-class Sorter {
-  constructor(public collection: number[]) {}
+import { CharCollection } from "./CharCollection";
+import { NumbersCollection } from "./NumbersCollection";
+import { Sorter } from "./SortingAlgorithm";
 
-  sort(): void {
-    const [maxNumber, minNumber] = [
-      Math.max(...this.collection),
-      Math.min(...this.collection),
-    ];
+const numbersCollection = new NumbersCollection([1, -20, 3, 45, -12, 345]);
+const charCollection = new CharCollection("hello world");
 
-    const arrayLength = maxNumber - minNumber + 1;
+new Sorter(numbersCollection).sort();
+new Sorter(charCollection).sort();
 
-    let count: number[][] | Record<number, number> = Array.from(
-      { length: arrayLength },
-      (_, i) => [minNumber + i, 0]
-    );
+console.log(numbersCollection.sortedArray); // Expected output [ -20, -12, 1, 3, 45, 345 ]
+console.log(charCollection.getSortedString()); // Expected output dehllloorw
 
-    count = Object.fromEntries(count);
-
-    for (const number of this.collection) {
-      count[number] = ++(count[number] as number) || 0;
-    }
-
-    for (let index = minNumber; index < maxNumber; index++) {
-      (count[index + 1] as number) += count[index] as number;
-    }
-
-    let output = Array(this.collection.length);
-
-    for (let index = this.collection.length - 1; index >= 0; index--) {
-      output[
-        --(count[this.collection[index] as number] as number)
-      ] = this.collection[index];
-    }
-
-    console.log(output);
-  }
-}
-
-let exampleArrayLength = 100;
-
-const testArray = Array.from(
-  { length: exampleArrayLength },
-  () =>
-    Math.floor(Math.random() * exampleArrayLength * 2 + 1) - exampleArrayLength
-);
-
-new Sorter(testArray).sort();
+// TODO Order a linked list
