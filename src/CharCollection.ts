@@ -13,9 +13,4 @@ export class CharCollection extends CountingSort {
     this.smallestInputValue = Math.min(...this.arrayToSort);
     this.sortedArray = Array(this.input.length);
   }
-
-  getSortedString() {
-    super.sort();
-    return this.sortedArray.map((v, _) => String.fromCharCode(v)).join("");
-  }
 }
