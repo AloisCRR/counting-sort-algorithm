@@ -1,48 +1,39 @@
-export interface Sortable {
-  largestInputValue: number;
-  smallestInputValue: number;
-  arrayToSort: number[];
-  sortedArray: number[];
-}
-
-export class Sorter {
-  constructor(public collection: Sortable) {}
+export abstract class CountingSort {
+  protected abstract largestInputValue: number;
+  abstract smallestInputValue: number;
+  abstract arrayToSort: number[];
+  abstract sortedArray: number[];
 
   sort() {
-    const countObjectLength =
-      this.collection.largestInputValue -
-      this.collection.smallestInputValue +
-      1;
+    let { largestInputValue, smallestInputValue, arrayToSort } = this;
 
-    const arrayToSortLength = this.collection.arrayToSort.length;
+    const countObjectLength = largestInputValue - smallestInputValue + 1;
+
+    const arrayToSortLength = arrayToSort.length;
 
     let countArrayShape = Array.from<number, number[]>(
       { length: countObjectLength },
-      (_, i) => [this.collection.smallestInputValue + i, 0]
+      (_, i) => [smallestInputValue + i, 0]
     );
 
     let count: Record<number, number> = Object.fromEntries(countArrayShape);
 
-    for (let item of this.collection.arrayToSort) {
+    for (let item of arrayToSort) {
       count[item] = ++count[item] || 0;
     }
 
-    for (
-      let index = this.collection.smallestInputValue;
-      index < this.collection.largestInputValue;
-      index++
-    ) {
+    for (let index = smallestInputValue; index < largestInputValue; index++) {
       count[index + 1] += count[index] || 0;
     }
 
     let output: number[] = Array(arrayToSortLength);
 
     for (let index = arrayToSortLength - 1; index >= 0; index--) {
-      output[
-        --count[this.collection.arrayToSort[index]!]
-      ] = this.collection.arrayToSort[index]!;
+      output[--count[arrayToSort[index]!]] = arrayToSort[index]!;
     }
 
-    this.collection.sortedArray = output;
+    this.sortedArray = output;
+
+    return output;
   }
 }
