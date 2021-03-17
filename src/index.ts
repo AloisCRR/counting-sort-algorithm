@@ -1,7 +1,7 @@
 import { CharCollection } from "./CharCollection";
 import { NumbersCollection } from "./NumbersCollection";
 
-declare global {
+/* declare global {
   interface Array<T> {
     getSortedString(): string;
   }
@@ -11,9 +11,10 @@ Array.prototype.getSortedString = function <T extends number>(
   this: T[]
 ): string {
   return this.map((v, _) => String.fromCharCode(v)).join("");
-};
+}; */
 
-const numbersCollection = new NumbersCollection([1, -20, 3, -2, 45]).sort();
+const numbersCollection = new NumbersCollection([1, -20, 3, -2, 45]).sort()
+  .sortedArray;
 const charCollection = new CharCollection("hello world")
   .sort()
   .getSortedString();

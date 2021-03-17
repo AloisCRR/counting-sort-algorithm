@@ -34,6 +34,6 @@ export abstract class CountingSort {
 
     this.sortedArray = output;
 
-    return output;
+    return this;
   }
 }
