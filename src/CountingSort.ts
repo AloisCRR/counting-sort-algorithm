@@ -1,10 +1,18 @@
-export abstract class CountingSort {
-  protected abstract largestInputValue: number;
-  abstract smallestInputValue: number;
-  abstract arrayToSort: number[];
-  abstract sortedArray: number[];
+export class CountingSort {
+  private largestInputValue: number;
+  private smallestInputValue: number;
+  private arrayToSort: number[];
+  sortedArray: number[];
 
-  sort() {
+  constructor(input: number[]) {
+    this.largestInputValue = Math.max(...input);
+    this.smallestInputValue = Math.min(...input);
+    this.arrayToSort = input;
+    this.sortedArray = Array(input.length);
+    this.sort();
+  }
+
+  private sort() {
     let { largestInputValue, smallestInputValue, arrayToSort } = this;
 
     const countObjectLength = largestInputValue - smallestInputValue + 1;
